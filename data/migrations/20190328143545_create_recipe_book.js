@@ -38,7 +38,7 @@ exports.up = function(knex, Promise) {
         .notNullable()
         .unique();
     })
-    .createTable('recipes_incredients', table => {
+    .createTable('recipes_ingredients', table => {
       table.increments();
       table
         .integer('recipe_id')
@@ -63,4 +63,11 @@ exports.up = function(knex, Promise) {
     });
 };
 
-exports.down = function(knex, Promise) {};
+exports.down = function(knex, Promise) {
+  return knex.schema
+    .dropTableIfExists('recipes_ingredients')
+    .dropTableIfExists('instructions')
+    .dropTableIfExists('ingredients')
+    .dropTableIfExists('recipes')
+    .dropTableIfExists('dishes');
+};
